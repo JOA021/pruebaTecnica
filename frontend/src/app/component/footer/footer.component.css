@@ -1,0 +1,63 @@
+footer {
+    background: linear-gradient(to right, #8EB1BF, #42778C);
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    flex-wrap: wrap;
+}
+
+.logo img {
+    height: 230px;
+    width: auto;
+}
+
+.information,
+.contact {
+    margin: 20px;
+    flex: 1; 
+}
+
+.information p,
+.information h1 {
+    margin-bottom: 20px;
+    font-size: 14px; 
+}
+
+.contact svg {
+    width: 2rem;
+    height: 5rem;
+    margin: 15px;
+}
+
+@media screen and (max-width: 768px) {
+    footer {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .logo img {
+        width: 100%;
+        height: auto;
+        max-width: 200px; 
+    }
+
+    .information,
+    .contact {
+        margin: 10px;
+    }
+
+    .information p {
+        font-size: 12px;
+    }
+
+    .information h1 {
+        font-size: 16px;
+    }
+
+    .contact svg {
+        width: 1.5rem;
+        height: 3.5rem;
+        margin: 10px;
+    }
+}

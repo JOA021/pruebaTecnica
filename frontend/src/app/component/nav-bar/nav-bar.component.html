@@ -1,0 +1,16 @@
+<nav class="navbar">
+    <section class="logo">
+        <img src="https://i.pinimg.com/564x/5c/d7/63/5cd76320546a0b2b525dd6c3f604cec8.jpg" alt="">
+    </section>
+    <section class="navbarLinks" [class.show]="isMenuVisible">
+        <a routerLink="/">Inicio</a>
+        <a routerLink="/nosotros">Nosotros</a>
+        <a routerLink="/registro">Registro</a>
+    </section>
+    <div class="menu-icon" (click)="toggleMenu()">
+        <img *ngIf="isMenuVisible" src="https://www.google.com/url?sa=i&url=https%3A%2F%2Ficon-icons.com%2Fes%2Ficono%2Fhamburguesa-bot%25C3%25B3n-men%25C3%25BA%2F155296&psig=AOvVaw3gj_kAcVCI7_IPkjPybL_Q&ust=1709778937018000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCNiv_oPN3oQDFQAAAAAdAAAAABAE" alt="Icono del menú">
+        <div *ngIf="!isMenuVisible" class="bar"></div>
+        <div *ngIf="!isMenuVisible" class="bar"></div>
+        <div *ngIf="!isMenuVisible" class="bar"></div>
+    </div>
+</nav>

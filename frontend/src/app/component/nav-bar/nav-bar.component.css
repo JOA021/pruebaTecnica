@@ -1,0 +1,63 @@
+.navbar{
+    background-color: #FFFFFF;
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 20px;
+}
+
+.logo img{
+    max-height: 100px; 
+}
+
+.navbarLinks a{
+    font-weight: 600;
+    margin: 0 20px;
+    transition: color 0.3s ease-in-out;
+}
+
+.navbarLinks a:hover{
+    background-color: #4480A6;
+    border-radius: 5px;
+}
+
+.menu-icon {
+    display: none;
+    cursor: pointer;
+}
+
+.menu-icon img {
+    max-height: 30px; /* Ajusta el tamaño del icono según tus necesidades */
+}
+
+.bar {
+    width: 25px;
+    height: 3px;
+    background-color: #333;
+    margin: 6px 0;
+}
+
+/* Ajustes responsivos */
+@media screen and (max-width: 768px) {
+    .navbarLinks {
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        background-color: #FFFFFF;
+        width: 100%;
+        text-align: center;
+        display: none;
+    }
+
+    .navbarLinks.show {
+        display: flex;
+    }
+
+    .navbarLinks a {
+        margin: 10px 0;
+    }
+
+    .menu-icon {
+        display: block;
+    }
+}
