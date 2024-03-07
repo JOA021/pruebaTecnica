@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import { adminModel } from '../models/admin.models';
+import { adminModel } from '../models/admin.models.js';
 
 
 export const singupAdmin = async (req, res) => {
@@ -52,16 +52,16 @@ export const loginAdmin = async (req, res) =>{
     }     
 }
 
-export const getUser = async (request, response) => {
-    let token = request.headers.authorization?.split(' ')[1];;
+export const getAdmin = async (req, res) => {
+    let token = req.headers.authorization?.split(' ')[1];;
     let decodedToken = jwt.decode(token, process.env.JWT_SECRET);
     let id = decodedToken._id;
   
     try {
       const userExist = await usersModel.findOne({ "_id": id });
-      response.json(userExist);
+      res.json(userExist);
     } catch (e) {
       console.log(e);
-      response.json({ error: e.message || 'Error en el servidor' });
+      res.json({ error: e.message || 'Error en el servidor' });
     }
   };

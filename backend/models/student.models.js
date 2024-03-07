@@ -15,7 +15,8 @@ const studentSchema = mongoose.Schema({
         required: true
     },
     userType: {
-        type: "student",
+        type: String,
+        default: "student"
     },
     age: {
         type: Number,
@@ -40,4 +41,4 @@ const studentSchema = mongoose.Schema({
 
 studentSchema.index({ email: 1},{ unique: true });
 
-export const studentModel = mongoose.model('Teacher', studentSchema)
+export const studentModel = mongoose.model('Student', studentSchema)

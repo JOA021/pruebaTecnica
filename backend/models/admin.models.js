@@ -15,7 +15,8 @@ const adminSchema = mongoose.Schema({
         required: true
     },
     userType: {
-        type: "admin",
+        type: String,
+        default: "admin"
     },
     token: {
         type: String,
@@ -26,5 +27,5 @@ const adminSchema = mongoose.Schema({
 
 adminSchema.index({ email: 1 }, { unique: true });
 
-export const AdminModel = mongoose.model('Admin', adminSchema);
+export const adminModel = mongoose.model('Admin', adminSchema);
 

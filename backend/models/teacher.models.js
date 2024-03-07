@@ -15,7 +15,8 @@ const teacherSchema = mongoose.Schema({
         required: true
     },
     userType: {
-        type: "teacher",
+        type: String,
+        default: "teacher"
     },
     citizenshipCard: {
         type: Number,
