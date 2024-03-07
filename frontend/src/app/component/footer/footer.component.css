@@ -1,4 +1,5 @@
 footer {
+    width: 100%;
     background: linear-gradient(to right, #8EB1BF, #42778C);
     display: flex;
     justify-content: space-between;
@@ -11,16 +12,23 @@ footer {
     width: auto;
 }
 
-.information,
+.information{
+    margin: 20px;
+    flex: 1; 
+    display: flex;
+    flex-direction: column;
+}
+
 .contact {
     margin: 20px;
     flex: 1; 
 }
 
-.information p,
-.information h1 {
+.information a {
     margin-bottom: 20px;
-    font-size: 14px; 
+    font-size: 14px;
+    text-decoration: none;
+    color: black;
 }
 
 .contact svg {
