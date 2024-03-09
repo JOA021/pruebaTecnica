@@ -20,7 +20,7 @@ const teacherSchema = mongoose.Schema({
     },
     citizenshipCard: {
         type: Number,
-        unique: true,
+        unique: true, 
         required: true
     },
     age:{
@@ -28,16 +28,10 @@ const teacherSchema = mongoose.Schema({
         required: true
     },
     maritalStatus:{
-        type: Number,
-        required: true
-    },
-    token: {
         type: String,
-        unique: true,
-        required: false,
-    },
-
-})
+        required: true
+    }
+});
 
 teacherSchema.index({ email: 1},{ unique: true});
 

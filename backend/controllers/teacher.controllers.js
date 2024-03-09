@@ -1,35 +1,34 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import { studentModel } from '../models/student.models.js'
+import { teacherModel } from '../models/teacher.models.js'
 
-export const singupStudent = async (req, res) => {
-    try{
+export const singupTeacher = async (req, res) => {
+    try {
         let body = req.body;
 
-        body.password = bcrypt.hashSync(body.password, parseInt(process.env.MASTER_KEY))
+        body.password = bcrypt.hashSync(body.password, parseInt(process.env.MASTER_KEY));
 
-        let newStudent = await studentModel.create(body);
+        let newTeacher = await teacherModel.create(body);
 
-        res.json(newStudent)
-    }catch (e){
-        console.log(e)
-        res.json({error:e.message || 'Error en el servidor'})
+        res.json(newTeacher);
+    } catch (e) {
+        console.log(e);
+        res.status(500).json({ error: e.message || 'Error en el servidor' });
     }
-}
-
-export const loginStudent = async (req, res) =>{
+};
+export const loginTeacher = async (req, res) =>{
     try{
         let body = req.body;
-        let studentExist = await studentModel.findOne({ email: body.email});
+        let teacherExist = await teacherModel.findOne({ email: body.email});
         
-        if (!studentExist) {
+        if (!teacherExist) {
             return res.json({ token: null, error: "No existe un usuario con este correo electronico"});
         }
 
-        const validationPassword = bcrypt.compareSync(body.password, studentExist.password);
+        const validationPassword = bcrypt.compareSync(body.password, teacherExist.password);
 
         if (validationPassword) {
-            const payload = { _id: studentExist._id};
+            const payload = { _id: teacherExist._id};
             const token = jwt.sign(payload, process.env.JWT_KEY);
             return res.send({ token });
         } else {
@@ -41,34 +40,38 @@ export const loginStudent = async (req, res) =>{
     }     
 }
 
-export const getStudent = async (req, res) => {
+export const getTeacher = async (req, res) => {
     try {
         // Obtén todos los profesores en la base de datos
-        const allStudents = await studentModel.find();
+        const allTeachers = await teacherModel.find();
 
         // Devuelve la lista de profesores
-        res.json(allStudents);
+        res.json(allTeachers);
     } catch (e) {
         console.log(e);
         res.status(500).json({ error: e.message || 'Error en el servidor' });
     }
 };
 
-export const deleteStudentByName = async (req, res) => {
+export const deleteTeacherByName = async (req, res) => {
     try {
         const { name } = req.params;
 
+        // Verifica si el nombre es proporcionado
         if (!name) {
             return res.status(400).json({ error: "Se requiere un nombre válido" });
         }
 
-        const deletedStudent = await studentModel.findOneAndDelete({ name });
+        // Busca al profesor por nombre y elimínalo
+        const deletedTeacher = await teacherModel.findOneAndDelete({ name });
 
-        if (!deletedStudent) {
+        // Verifica si se encontró y eliminó al profesor
+        if (!deletedTeacher) {
             return res.status(404).json({ error: "Profesor no encontrado" });
         }
 
-        res.json(deletedStudent);
+        // Devuelve la información del profesor eliminado
+        res.json(deletedTeacher);
     } catch (e) {
         console.log(e);
         res.status(500).json({ error: e.message || 'Error en el servidor' });

@@ -30,13 +30,7 @@ const studentSchema = mongoose.Schema({
         type: Number,
         unique: true,
         required: true
-    },
-    token: {
-        type: String,
-        unique: true,
-        required: false,
     }
-
 })
 
 studentSchema.index({ email: 1},{ unique: true });

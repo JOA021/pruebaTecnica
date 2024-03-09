@@ -1,31 +1,47 @@
 <section class="background">
     <section class="container">
-        <form action="#">
+        <form [formGroup]="studentForm" (ngSubmit)="onSubmit()">
             <h2>Registro Estudiante</h2>
             <section class="container-input">
                 <section class="name">
-                    <input type="text" placeholder="Nombre" required>
+                    <input type="text" placeholder="Nombre" formControlName="name" required>
                 </section>
                 <section class="email">
-                    <input type="email" placeholder="Email" required>
+                    <input type="email" placeholder="Email" formControlName="email" required>
                 </section>
                 <section class="password">
-                    <input type="password" placeholder="Contraseña" required>
+                    <input type="password" placeholder="Contraseña" formControlName="password" required (input)="passwordValidator()">
+                    <div *ngIf="studentForm.get('confirmPassword')?.hasError('passwordMismatch')">
+                        Las contraseñas no coinciden.
+                    </div>
+                    <div *ngIf="studentForm.get('password')?.hasError('minlength')">
+                        La contraseña debe tener al menos 8 caracteres.
+                    </div>
                 </section>
                 <section class="password">
-                    <input type="password" placeholder="Confirmar contraseña" required>
+                    <input type="password" placeholder="Confirmar contraseña" formControlName="confirmPassword"
+                        required (input)="passwordValidator()">
+                    <div *ngIf="studentForm.get('confirmPassword')?.hasError('passwordMismatch')">
+                        Las contraseñas no coinciden.
+                    </div>
+                    <div *ngIf="studentForm.get('password')?.hasError('minlength')">
+                        La contraseña debe tener al menos 8 caracteres.
+                    </div>
                 </section>
                 <section class="age">
-                    <input type="number" placeholder="Edad" required>
+                    <input type="number" placeholder="Edad" formControlName="age" required>
                 </section>
                 <section class="grade">
-                    <input type="text" placeholder="Grado" required>
+                    <input type="text" placeholder="Grado del estudiante" formControlName="grade" required>
                 </section>
                 <section class="identityCard">
-                    <input type="number" placeholder="Tarjeta de identidad o cedula">
+                    <input type="number" placeholder="Documento" formControlName="identityCard" required>
                 </section>
             </section>
             <button type="submit">Registrar</button>
+            <section *ngIf="registrationSuccess" class="success-message">
+                Registro exitoso
+            </section>
         </form>
     </section>
 </section>

@@ -18,11 +18,6 @@ const adminSchema = mongoose.Schema({
         type: String,
         default: "admin"
     },
-    token: {
-        type: String,
-        unique: true,
-        required: false,
-    }
 });
 
 adminSchema.index({ email: 1 }, { unique: true });

@@ -125,3 +125,15 @@ button:hover {
         max-width: 70%;
     }
 }
+
+.success-message {
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 2;
+    display: none; /* Inicialmente oculto */
+}

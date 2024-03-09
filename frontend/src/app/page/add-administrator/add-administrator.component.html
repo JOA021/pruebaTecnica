@@ -1,18 +1,31 @@
 <section class="background">
     <section class="container">
-        <form action="#">
+        <form [formGroup]="adminForm" (ngSubmit)="onSubmit()">
             <h2>Registro Adminitrador</h2>
             <section class="name">
-                <input type="text" placeholder="Nombre" required>
+                <input type="text" placeholder="Nombre" formControlName="name" required>
             </section>
             <section class="email">
-                <input type="email" placeholder="Email" required>
+                <input type="email" placeholder="Email" formControlName="email" required>
             </section>
             <section class="password">
-                <input type="password" placeholder="Contraseña" required>
+                <input type="password" placeholder="Contraseña" formControlName="password" required (input)="passwordValidator()">
+                <div *ngIf="adminForm.get('confirmPassword')?.hasError('passwordMismatch')">
+                    Las contraseñas no coinciden.
+                </div>
+                <div *ngIf="adminForm.get('password')?.hasError('minlength')">
+                    La contraseña debe tener al menos 8 caracteres.
+                </div>
             </section>
             <section class="password">
-                <input type="password" placeholder="Contraseña" required>
+                <input type="password" placeholder="Confirmar contraseña" formControlName="confirmPassword"
+                    required (input)="passwordValidator()">
+                <div *ngIf="adminForm.get('confirmPassword')?.hasError('passwordMismatch')">
+                    Las contraseñas no coinciden.
+                </div>
+                <div *ngIf="adminForm.get('password')?.hasError('minlength')">
+                    La contraseña debe tener al menos 8 caracteres.
+                </div>
             </section>
             <button type="submit">Registrar</button>
         </form>

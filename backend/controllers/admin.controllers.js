@@ -11,17 +11,7 @@ export const singupAdmin = async (req, res) => {
 
         let newAdmin = await adminModel.create(body);
 
-        const payload = { _id: newAdmin._id};
-
-
-        let token = jwt.sign(payload, process.env.JWT_KEY);
-
-        const adminData = {
-            token,
-            admin: newAdmin,
-        }
-
-        res.send(adminData)
+        res.send(newAdmin)
     }catch (e){
         console.log(e)
         res.json({error:e.message || 'Error en el servidor'})
@@ -53,15 +43,35 @@ export const loginAdmin = async (req, res) =>{
 }
 
 export const getAdmin = async (req, res) => {
-    let token = req.headers.authorization?.split(' ')[1];;
-    let decodedToken = jwt.decode(token, process.env.JWT_SECRET);
-    let id = decodedToken._id;
-  
     try {
-      const userExist = await usersModel.findOne({ "_id": id });
-      res.json(userExist);
+        // Obtén todos los profesores en la base de datos
+        const allAdmins = await adminModel.find();
+
+        // Devuelve la lista de profesores
+        res.json(allAdmins);
     } catch (e) {
-      console.log(e);
-      res.json({ error: e.message || 'Error en el servidor' });
+        console.log(e);
+        res.status(500).json({ error: e.message || 'Error en el servidor' });
+    }
+};
+
+export const deleteAdminByName = async (req, res) => {
+    try {
+        const { name } = req.params;
+
+        if (!name) {
+            return res.status(400).json({ error: "Se requiere un nombre válido" });
+        }
+
+        const deleteAdmind = await adminModel.findOneAndDelete({ name });
+
+        if (!deleteAdmind) {
+            return res.status(404).json({ error: "Profesor no encontrado" });
+        }
+
+        res.json(deleteAdmind);
+    } catch (e) {
+        console.log(e);
+        res.status(500).json({ error: e.message || 'Error en el servidor' });
     }
   };
