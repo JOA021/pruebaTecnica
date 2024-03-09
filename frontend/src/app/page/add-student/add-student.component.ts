@@ -46,7 +46,7 @@ export class AddStudentComponent {
       identityCard: this.studentForm.value.identityCard,
     };
 
-    this.studentService.registerTeacher(newStudent).subscribe({
+    this.studentService.registerStudent(newStudent).subscribe({
       next: response =>{
         console.log('Registro exitoso:', response);
         this.registrationSuccess = true

@@ -30,9 +30,9 @@ export const loginAdmin = async (req, res) =>{
         const validationPassword = bcrypt.compareSync(body.password, adminExist.password);
 
         if (validationPassword) {
-            const payload = { _id: adminExist._id};
+            const payload = { _id: adminExist._id, userType: "admin"};
             const token = jwt.sign(payload, process.env.JWT_KEY);
-            return res.send({ token });
+            return res.send({ token, userType: "admin" });
         } else {
             return res.send({ token: null, error: "Credenciales incorrectas"})
         }

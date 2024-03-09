@@ -1,13 +1,19 @@
 <section class="background">
     <section class="container">
-        <form action="#">
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
             <h2>Registro</h2>
+            <select class="form-select" aria-label="Default select example" formControlName="rol">
+                <option selected>Selecciona...</option>
+                <option value="1">Administrador</option>
+                <option value="2">Profe</option>
+                <option value="3">Estudiante</option>
+            </select>
             <section class="email">
-                <input type="email" placeholder="Ingresa tu Email" required>
+                <input type="email" placeholder="Ingresa tu Email" formControlName="email" required>
 
             </section>
             <section class="password">
-                <input type="password" placeholder="Ingresa tu Contraseña" name="" id="">
+                <input type="password" placeholder="Ingresa tu Contraseña" formControlName="password" id="">
 
             </section>
             <section class="forget">
@@ -19,7 +25,7 @@
             </section>
             <button type="submit">Ingresar</button>
             <div class="return">
-                <p>No eres estudiante? <a href="/"> Inicio </a></p>
+                <p>No eres parte de la institución? <a href="/"> Inicio </a></p>
             </div>
         </form>
     </section>

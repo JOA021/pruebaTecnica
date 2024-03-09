@@ -17,36 +17,34 @@ export const singupStudent = async (req, res) => {
     }
 }
 
-export const loginStudent = async (req, res) =>{
-    try{
+export const loginStudent = async (req, res) => {
+    try {
         let body = req.body;
-        let studentExist = await studentModel.findOne({ email: body.email});
-        
+        let studentExist = await studentModel.findOne({ email: body.email });
+
         if (!studentExist) {
-            return res.json({ token: null, error: "No existe un usuario con este correo electronico"});
+            return res.status(401).json({ token: null, error: "Credenciales incorrectas" });
         }
 
         const validationPassword = bcrypt.compareSync(body.password, studentExist.password);
 
         if (validationPassword) {
-            const payload = { _id: studentExist._id};
+            const payload = { _id: studentExist._id, userType: "student" };
             const token = jwt.sign(payload, process.env.JWT_KEY);
-            return res.send({ token });
+            return res.send({ token, userType: "student" });
         } else {
-            return res.send({ token: null, error: "Credenciales incorrectas"})
+            return res.status(401).json({ token: null, error: "Credenciales incorrectas" });
         }
     } catch (e) {
-        console.log(e)
-        return res.json({ token: null, error: e.message || 'Error en el servidor' });
-    }     
+        console.log(e);
+        return res.status(500).json({ token: null, error: 'Error en el servidor' });
+    }
 }
 
 export const getStudent = async (req, res) => {
     try {
-        // Obtén todos los profesores en la base de datos
         const allStudents = await studentModel.find();
 
-        // Devuelve la lista de profesores
         res.json(allStudents);
     } catch (e) {
         console.log(e);

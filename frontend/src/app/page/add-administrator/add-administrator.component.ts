@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Admin } from '../../models/admin.model';
 import { AdminService } from '../../services/admin.service';
-import { response } from 'express';
-import { error } from 'console';
 
 @Component({
   selector: 'app-add-administrator',
