@@ -103,3 +103,26 @@ export const createSubject = async (req, res) => {
         res.status(500).json({ error: e.message || 'Error en el servidor' });
     }
 }
+
+export const getSubjects = async (req, res) =>{
+    try{
+        const { teacherId } = req.params
+        if (!teacherId) {
+            return res.status(400).json({ error: 'Se requiere un ID de profesor válido' });
+        }
+
+        const teacher = await teacherModel.findById(teacherId);
+
+        if (!teacher) {
+            return res.status(404).json({ error: 'Profesor no encontrado '})
+        }
+
+        const subjects = teacher.subjects;
+
+        res.json(subjects)
+    } catch{
+        console.log(e);
+        res.status(500).json({ error: e.message || 'Error en el servidor' });
+    }
+}
+

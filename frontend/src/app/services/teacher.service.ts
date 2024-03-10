@@ -51,6 +51,16 @@ export class TeacherService {
     );
   }
 
+  obtainSubjects(teacherId: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/getSubjects/${teacherId}`, { headers: this.headers }).pipe(
+      catchError((error) => {
+        console.error('Error en la solicitud al obtener las materias:', error);
+        return throwError(() => error);
+      })
+    );
+  }
+
+
 
   // Otros  
   saveToken(token: string, teacherId?: string): void {
@@ -63,9 +73,12 @@ export class TeacherService {
     localStorage.setItem(this.teacherIdKey, this.teacherId);
   }
 
-  getTeacherId(): string | undefined {
-    const storedTeacherId = localStorage.getItem(this.teacherIdKey);
-    this.teacherId = storedTeacherId || undefined;
-    return this.teacherId;
+  getTeacherId(): string | null {
+    if (typeof localStorage !== 'undefined') {
+      return localStorage.getItem(this.teacherIdKey);
+    } else {
+      console.error('localStorage is not defined.');
+      return null;
+    }
   }
 }
