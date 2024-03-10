@@ -1,0 +1,14 @@
+<section class="background">
+    <section class="container">
+        <form [formGroup]="addSubjectForm" (ngSubmit)="onSubmit()">
+            <h2>Agrega tu materia</h2>
+            <section class="name">
+                <input type="text" placeholder="Nombre de la materia" formControlName="nameSubject" required>
+            </section>
+            <section class="grade">
+                <input type="text" placeholder="Escribe el numero del grado" formControlName="gradeSubject" required>
+            </section>
+            <button type="submit">Enviar</button>
+        </form>
+    </section>
+</section>

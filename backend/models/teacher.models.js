@@ -1,5 +1,25 @@
 import mongoose from "mongoose";
 
+const messageSchema = mongoose.Schema({
+    content: {
+        type: String,
+        required: false
+    }
+});
+
+const subjectSchema = mongoose.Schema({
+    nameSubject: {
+        type: String,
+        required: true
+    },
+
+    gradeSubject:{
+         type: String,
+         required: true,
+    },
+    messages: [messageSchema]
+})
+
 const teacherSchema = mongoose.Schema({
     name: {
         type: String,
@@ -30,7 +50,8 @@ const teacherSchema = mongoose.Schema({
     maritalStatus:{
         type: String,
         required: true
-    }
+    },
+    subjects: [subjectSchema]
 });
 
 teacherSchema.index({ email: 1},{ unique: true});

@@ -31,7 +31,7 @@ export const loginTeacher = async (req, res) =>{
         if (validationPassword) {
             const payload = { _id: teacherExist._id, userType: "student"};  
             const token = jwt.sign(payload, process.env.JWT_KEY);
-            return res.send({ token, userType: "teacher" });
+            return res.send({ token, userType: "teacher", subjects: teacherExist.subjects, teacherId: teacherExist._id});
         } else {
             return res.send({ token: null, error: "Credenciales incorrectas"})
         }
@@ -72,3 +72,34 @@ export const deleteTeacherByName = async (req, res) => {
         res.status(500).json({ error: e.message || 'Error en el servidor' });
     }
 };
+
+export const createSubject = async (req, res) => {
+    try {
+        const { teacherId } = req.params;
+        const { nameSubject, gradeSubject } = req.body;
+
+        if (!teacherId || !nameSubject || !gradeSubject){
+            return res.status(400).json({ error: 'Falta información necesaria para crear la materia' });
+        }
+
+        const teacher = await teacherModel.findById(teacherId);
+
+        if (!teacher){
+            return res.status(404).json({ error: 'Profesor no encontrado' });
+        }
+
+        const newSubject = {
+            nameSubject,
+            gradeSubject,
+            messages: [] 
+        };
+
+        teacher.subjects.push(newSubject)
+        await teacher.save();
+
+        res.json(newSubject)
+    } catch (e){
+        console.log(e)
+        res.status(500).json({ error: e.message || 'Error en el servidor' });
+    }
+}

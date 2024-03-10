@@ -3,7 +3,7 @@
     height: 100vh;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: center;
 }
 
 .background::before {
@@ -24,14 +24,14 @@
     background: rgba(255, 255, 255, 1);
     padding: 20px;
     border-radius: 10px;
-    max-width: 400px;
+    max-width: 280px;
     width: 90%;
-    height: 450px;
+    height: 350px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 2);
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 20px;
+    margin: 20px;
 }
 
 form{
@@ -46,8 +46,7 @@ form h2{
 }
 
 .name,
-.email,
-.password {
+.grade {
     margin-bottom: 20px;
     width: 100%;
 }
@@ -74,7 +73,6 @@ button{
 button:hover {
     background-color: #4480A6;
 }
-
 
 @media screen and (max-width: 600px) {
 

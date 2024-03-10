@@ -70,17 +70,18 @@ export class RegisterComponent {
     }
   }
 
-  private handleLoginResult(result: { token: string, userType: string } | { error: string }): void {
+  private handleLoginResult(result: { token: string, userType: string, teacherId?: string} | { error: string }): void {
     if ('token' in result && 'userType' in result) {
       const token = result.token as string;
       const usertype = result.userType as string;
-
+      
       switch (usertype) {
         case 'admin':
           this.adminService.saveToken(token);
           break;
         case 'teacher':
           this.teacherService.saveToken(token);
+          this.teacherService.saveTeacherId(result.teacherId);
           break;
         case 'student':
           this.studentService.saveToken(token);

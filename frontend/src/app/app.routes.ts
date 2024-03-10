@@ -8,6 +8,7 @@ import { AddTeacherComponent } from './page/add-teacher/add-teacher.component';
 import { AddStudentComponent } from './page/add-student/add-student.component';
 import { TeacherPageComponent } from './page/teacher-page/teacher-page.component';
 import { StudentPageComponent } from './page/student-page/student-page.component';
+import { AddSubjectComponent } from './page/add-subject/add-subject.component';
 
 export const routes: Routes = [
     {path: "", component: FirtsPageComponent},
@@ -19,4 +20,5 @@ export const routes: Routes = [
     {path: "addAdmin", component: AddAdministratorComponent},
     {path: "addTeacher", component: AddTeacherComponent},
     {path: "addStudent", component: AddStudentComponent},
+    {path: "addSubject", component: AddSubjectComponent}
 ]
