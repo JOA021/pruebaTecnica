@@ -31,7 +31,7 @@ export const loginStudent = async (req, res) => {
         if (validationPassword) {
             const payload = { _id: studentExist._id, userType: "student" };
             const token = jwt.sign(payload, process.env.JWT_KEY);
-            return res.send({ token, userType: "student" });
+            return res.send({ token, userType: "student", grade: studentExist.grade  });
         } else {
             return res.status(401).json({ token: null, error: "Credenciales incorrectas" });
         }

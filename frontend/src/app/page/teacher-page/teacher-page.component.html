@@ -4,7 +4,6 @@
             <h2>{{ subject.nameSubject }}</h2>
             <h3>Grado: {{ subject.gradeSubject }}</h3>
             <div *ngIf="subject.messages.length > 0">
-                <!-- Mostrar mensajes si hay alguno -->
                 <h4>Mensajes:</h4>
                 <ul>
                     <li *ngFor="let message of subject.messages">{{ message }}</li>

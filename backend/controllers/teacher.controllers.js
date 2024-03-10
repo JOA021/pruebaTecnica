@@ -126,3 +126,33 @@ export const getSubjects = async (req, res) =>{
     }
 }
 
+export const getSubjectsByGrade = async (req, res) => {
+    try {
+      const { grade } = req.params;
+  
+      if (!grade) {
+        return res.status(400).json({ error: 'Se requiere un grado válido' });
+      }
+  
+      const teachers = await teacherModel.find();
+      const subjects = [];
+  
+      teachers.forEach((teacher) => {
+        teacher.subjects.forEach((subject) => {
+          if (subject.gradeSubject === grade) {
+            subjects.push({
+              teacherName: teacher.name,
+              subjectName: subject.nameSubject,
+              subjectGrade: subject.gradeSubject
+            });
+          }
+        });
+      });
+  
+      res.json(subjects);
+    } catch (e) {
+      console.log(e);
+      res.status(500).json({ error: e.message || 'Error en el servidor' });
+    }
+  };
+

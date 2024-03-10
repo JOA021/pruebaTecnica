@@ -70,7 +70,7 @@ export class RegisterComponent {
     }
   }
 
-  private handleLoginResult(result: { token: string, userType: string, teacherId?: string} | { error: string }): void {
+  private handleLoginResult(result: { token: string, userType: string, teacherId?: string, grade?: string } | { error: string }): void {
     if ('token' in result && 'userType' in result) {
       const token = result.token as string;
       const usertype = result.userType as string;
@@ -85,6 +85,7 @@ export class RegisterComponent {
           break;
         case 'student':
           this.studentService.saveToken(token);
+          this.studentService.saveStudentGrade(result.grade)
           break;
         default:
           console.error('Tipo de usuario no válido:', usertype);

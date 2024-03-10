@@ -41,6 +41,14 @@ export class TeacherService {
     );
   }
 
+  getTeacher(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/getTeacher`, { headers: this.headers }).pipe(
+      catchError((error) => {
+        console.error('Error en la solicitud:', error);
+        return throwError(() => error);
+      })
+    );
+  }
 
   createSubject(teacherId: string, subjectData: { nameSubject: string; gradeSubject: string }): Observable<any> {
     return this.http.post(`${this.apiUrl}/createSubject/${teacherId}`, subjectData, { headers: this.headers }).pipe(
@@ -55,6 +63,16 @@ export class TeacherService {
     return this.http.get(`${this.apiUrl}/getSubjects/${teacherId}`, { headers: this.headers }).pipe(
       catchError((error) => {
         console.error('Error en la solicitud al obtener las materias:', error);
+        return throwError(() => error);
+      })
+    );
+  }
+
+
+  obtainSubjectsByGrade(grade: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}/getSubjectsByGrade/${grade}`, { headers: this.headers }).pipe(
+      catchError((error) => {
+        console.error('Error en la solicitud al obtener las materias por grado:', error);
         return throwError(() => error);
       })
     );
