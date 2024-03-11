@@ -16,7 +16,7 @@ export class StudentPageComponent {
   constructor(private teacherService: TeacherService, private studentService: StudentService) { }
 
   ngOnInit(): void {
-    // Obtén el grado almacenado en el servicio de estudiante
+  
     const studentGrade = this.studentService.getStudentGrade();
 
     if (!studentGrade) {

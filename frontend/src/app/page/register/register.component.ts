@@ -5,7 +5,6 @@ import { StudentService } from '../../services/student.service';
 import { AdminService } from '../../services/admin.service';
 import { TeacherService } from '../../services/teacher.service';
 import { Router } from '@angular/router';
-import { error } from 'console';
 
 
 @Component({
@@ -95,12 +94,12 @@ export class RegisterComponent {
       this.router.navigate([`/${result.userType}`]);
     } else {
       console.error('Error en el inicio de sesión:', result.error || 'Error desconocido');
-      // Puedes manejar el error aquí según tus necesidades
+      
     }
   }
 
   private handleError(error: any): void {
     console.error('Error en el inicio de sesión:', error);
-    // Puedes manejar el error aquí según tus necesidades
+  
   }
 }

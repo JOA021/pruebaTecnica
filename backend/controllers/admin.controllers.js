@@ -44,10 +44,8 @@ export const loginAdmin = async (req, res) =>{
 
 export const getAdmin = async (req, res) => {
     try {
-        // Obtén todos los profesores en la base de datos
         const allAdmins = await adminModel.find();
 
-        // Devuelve la lista de profesores
         res.json(allAdmins);
     } catch (e) {
         console.log(e);

@@ -51,13 +51,11 @@ export class StudentService {
     if (grade !== undefined && grade !== null) {
       localStorage.setItem(this.gradeKey, grade);
     } else {
-      // Manejar el caso cuando grade es undefined o null, dependiendo de tus requerimientos
       console.error('Grade es undefined o null');
-      // O puedes simplemente no hacer nada en este caso
+      
     }
   }
 
-  // Nuevo método para obtener el grado
   getStudentGrade(): string | null {
     if (typeof localStorage !== 'undefined') {
       return localStorage.getItem(this.gradeKey);
